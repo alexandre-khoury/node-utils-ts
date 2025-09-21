@@ -1,0 +1,9 @@
+{
+  "extends": "@alexandre-khoury/config-ts/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "."
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

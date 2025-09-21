@@ -1,0 +1,12 @@
+# Dependencies
+node_modules
+
+# Build Outputs
+out/
+build
+dist
+generated
+*.tsbuildinfo
+
+# Misc
+.DS_Store

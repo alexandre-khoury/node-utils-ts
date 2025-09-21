@@ -1,0 +1,42 @@
+{
+  "name": "@alexandre-khoury/node-utils",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Utils that work in node environments",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexandre-khoury/general-utils-ts.git"
+  },
+  "license": "ISC",
+  "author": "Alexandre Khoury",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc",
+    "lint": "eslint --fix ./src"
+  },
+  "dependencies": {
+    "imapflow": "1.0.196",
+    "csv-parse": "6.1.0",
+    "csv-stringify": "6.6.0",
+    "mailparser": "3.7.4",
+    "@alexandre-khoury/config-ts": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/imapflow": "1.0.23",
+    "@types/mailparser": "3.4.6",
+    "typescript": "5.8.3",
+    "eslint": "9.36.0",
+    "@types/node": "24.5.2"
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10"
+  }
+}

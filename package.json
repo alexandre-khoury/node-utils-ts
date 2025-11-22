@@ -1,11 +1,11 @@
 {
   "name": "@alexandre-khoury/node-utils",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "private": false,
   "description": "Utils that work in node environments",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alexandre-khoury/general-utils-ts.git"
+    "url": "git+https://github.com/alexandre-khoury/node-utils-ts.git"
   },
   "license": "ISC",
   "author": "Alexandre Khoury",
@@ -16,6 +16,9 @@
       "import": "./dist/src/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc",

@@ -1,0 +1,57 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "/"
+    },
+    {
+      "path": "./src",
+      "name": "src"
+    }
+  ],
+  "extensions": {
+    "recommendations": [
+      "pkief.material-icon-theme",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "editorconfig.editorconfig"
+    ]
+  },
+  "settings": {
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "window.zoomLevel": 1,
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
+    "[javascript]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+      },
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "search.useParentIgnoreFiles": true,
+    "search.useIgnoreFiles": true,
+    "[typescript]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.addMissingImports.ts": "always",
+        "source.removeUnusedImports": "always"
+      },
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.iconTheme": "material-icon-theme"
+  }
+}

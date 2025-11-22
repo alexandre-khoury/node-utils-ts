@@ -1,8 +1,9 @@
-import { ImapFlow, ImapFlowOptions } from 'imapflow';
-import { simpleParser } from 'mailparser';
+import { ImapFlow, ImapFlowOptions } from "imapflow";
+import { simpleParser } from "mailparser";
 
 export declare namespace ImapUtils {
   interface ParsedEmail {
+    uid: number;
     sender: string;
     date: Date;
     subject: string;
@@ -12,19 +13,42 @@ export declare namespace ImapUtils {
 }
 
 export class ImapUtils {
+  static async moveEmail(
+    options: ImapFlowOptions,
+    uid: number,
+    sourceMailboxName: string,
+    destinationMailboxName: string
+  ) {
+    const client = new ImapFlow(options);
+    await client.connect();
+    const lock = await client.getMailboxLock(sourceMailboxName);
+    let result: boolean = false;
+    try {
+      const moveResult = await client.messageMove(uid, destinationMailboxName, {
+        uid: true,
+      });
+      result = !!moveResult;
+    } finally {
+      lock.release();
+    }
+    await client.logout();
+    return result;
+  }
+
   static async getLatestEmails(
     options: ImapFlowOptions,
     since: Date,
     filterBySender?: string,
+    mailboxName: string = "INBOX"
   ) {
     const parsedEmails: ImapUtils.ParsedEmail[] = [];
     const client = new ImapFlow(options);
     await client.connect();
-    const lock = await client.getMailboxLock('INBOX');
+    const lock = await client.getMailboxLock(mailboxName);
     try {
-      const emails = await client.search({ since });
-      if (emails) {
-        for await (const email of client.fetch(emails, {
+      const uids = await client.search({ since });
+      if (uids) {
+        for await (const email of client.fetch(uids, {
           envelope: true,
           internalDate: true,
           source: true,
@@ -39,11 +63,12 @@ export class ImapUtils {
           const parsed = await simpleParser(source);
 
           parsedEmails.push({
+            uid: email.uid,
             sender,
             date,
             subject,
-            bodyHtml: parsed.html || '',
-            bodyText: parsed.text ?? '',
+            bodyHtml: parsed.html || "",
+            bodyText: parsed.text ?? "",
           });
         }
       }

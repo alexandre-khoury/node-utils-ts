@@ -21,14 +21,13 @@ export class CryptoUtils {
     return this.sha256(s);
   }
 
-  static slowHash(password: string): string {
+  static slowHash(password: string, pepper: string): string {
     const HASH_ITERATIONS = 10000;
     const KEY_LENGTH = 64;
     const DIGEST = 'sha512';
-    const PEPPER = 'waveo_wfeuiohejfnjkewnf';
     return pbkdf2Sync(
       password,
-      PEPPER,
+      pepper,
       HASH_ITERATIONS,
       KEY_LENGTH,
       DIGEST,
@@ -87,7 +86,7 @@ export class CryptoUtils {
     encrypted: T,
     key: string,
   ): T {
-    //
+    // https://stackoverflow.com/a/53573115
     if (!encrypted) return encrypted;
     const ciphertext = Buffer.from(encrypted, 'hex');
     const authTag = ciphertext.subarray(-16);

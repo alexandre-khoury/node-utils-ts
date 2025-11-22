@@ -39,14 +39,20 @@ export class ImapUtils {
     options: ImapFlowOptions,
     since: Date,
     filterBySender?: string,
-    mailboxName: string = "INBOX"
+    mailboxName: string = "INBOX",
+    subjectSearchString?: string
   ) {
     const parsedEmails: ImapUtils.ParsedEmail[] = [];
     const client = new ImapFlow(options);
     await client.connect();
     const lock = await client.getMailboxLock(mailboxName);
     try {
-      const uids = await client.search({ since });
+      const uids = await client.search({
+        since,
+        ...(subjectSearchString
+          ? { header: { subject: subjectSearchString } }
+          : {}),
+      });
       if (uids) {
         for await (const email of client.fetch(uids, {
           envelope: true,
